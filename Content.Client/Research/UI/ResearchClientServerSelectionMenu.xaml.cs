@@ -53,7 +53,7 @@ namespace Content.Client.Research.UI
             for (var i = 0; i < _serverCount; i++)
             {
                 var id = _serverIds[i];
-                Servers.AddItem(Loc.GetString("research-client-server-selection-menu-server-entry-text", ("id", id), ("serverName", _serverNames[i])));
+                Servers.AddItem(Loc.GetString("research-client-server-selection-menu-server-entry-text", ("id", i), ("serverName", _serverNames[i])));
                 if (id == _selectedServerId)
                 {
                     Servers[i].Selected = true;
