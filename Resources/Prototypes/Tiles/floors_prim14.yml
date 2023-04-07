@@ -1,0 +1,27 @@
+- type: tile
+  id: FloorGrassDig2
+  name: tiles-planet-grass-floor-two
+  sprite: /Textures/Tiles/grass.png
+  baseTurfs:
+    - FloorGrassDig1
+  isSubfloor: true
+  canCrowbar: true
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemGrassDig
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: FloorGrassDig1
+  name: tiles-planet-grass-floor-one
+  sprite: /Textures/Tiles/grass.png
+  baseTurfs:
+    - FloorDirt
+  isSubfloor: true
+  canCrowbar: true
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemGrassDig
+  heatCapacity: 10000
+  weather: true

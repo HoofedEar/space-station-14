@@ -1,0 +1,18 @@
+- type: entity
+  name: shovel
+  parent: Crowbar
+  id: ShovelDig
+  components:
+    - type: Tag
+      tags:
+        - Shovel
+    - type: Sprite
+      sprite: Objects/Tools/crowbar.rsi
+      state: red-icon
+    - type: Item
+      sprite: Objects/Tools/crowbar.rsi
+      size: 10
+      heldPrefix: red
+    - type: Tool
+      qualities:
+        - Prying

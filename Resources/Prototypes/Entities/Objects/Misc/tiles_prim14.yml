@@ -1,0 +1,15 @@
+﻿- type: entity
+  name: grass tile (dig)
+  parent: FloorTileItemBase
+  id: FloorTileItemGrassDig
+  components:
+    - type: Sprite
+      state: grass
+    - type: Item
+      heldPrefix: grass
+    - type: FloorTile
+      outputs:
+        - Plating
+        - FloorGrassDig2
+    - type: Stack
+      stackType: FloorTileGrassDig

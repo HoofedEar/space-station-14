@@ -1,0 +1,5 @@
+﻿- type: stack
+  id: FloorTileGrassDig
+  name: grass floor tile
+  spawn: FloorTileItemGrassDig
+  maxCount: 30
