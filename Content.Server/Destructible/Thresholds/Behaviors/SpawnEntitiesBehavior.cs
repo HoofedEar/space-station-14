@@ -3,6 +3,10 @@ using Content.Server.Forensics;
 using Content.Server.Stack;
 using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
+using Robust.Server.GameObjects;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
@@ -27,7 +31,8 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
 
         public void Execute(EntityUid owner, DestructibleSystem system, EntityUid? cause = null)
         {
-            var position = system.EntityManager.GetComponent<TransformComponent>(owner).MapPosition;
+            var transformComp = system.EntityManager.GetComponent<TransformComponent>(owner);
+            var position = transformComp.MapPosition;
 
             var getRandomVector = () => new Vector2(system.Random.NextFloat(-Offset, Offset), system.Random.NextFloat(-Offset, Offset));
 
@@ -37,12 +42,23 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                     ? minMax.Min
                     : system.Random.Next(minMax.Min, minMax.Max + 1);
 
-                if (count == 0) continue;
+                if (count == 0)
+                    continue;
 
                 if (EntityPrototypeHelpers.HasComponent<StackComponent>(entityId, system.PrototypeManager, system.ComponentFactory))
                 {
-                    var spawned = system.EntityManager.SpawnEntity(entityId, position.Offset(getRandomVector()));
+                    var spawned = system.EntityManager.Spawn(entityId, position.Offset(getRandomVector()));
                     system.StackSystem.SetCount(spawned, count);
+
+                    TransferForensics(spawned, system, owner);
+                }
+                else if (EntityPrototypeHelpers.HasComponent<FixturesComponent>(entityId, system.PrototypeManager,
+                        system.ComponentFactory))
+                {
+                    var mapUid = transformComp.MapUid;
+                    var entityPosition = EntityCoordinates.FromMap((EntityUid)mapUid!, position, system.TransformSystem, system.EntityManager);
+                    var spawned = system.EntityManager.SpawnAttachedTo(entityId, entityPosition);
+                    system.TransformSystem.SetParent(spawned, transformComp.ParentUid);
 
                     TransferForensics(spawned, system, owner);
                 }
@@ -50,7 +66,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                 {
                     for (var i = 0; i < count; i++)
                     {
-                        var spawned = system.EntityManager.SpawnEntity(entityId, position.Offset(getRandomVector()));
+                        var spawned = system.EntityManager.Spawn(entityId, position.Offset(getRandomVector()));
 
                         TransferForensics(spawned, system, owner);
                     }
