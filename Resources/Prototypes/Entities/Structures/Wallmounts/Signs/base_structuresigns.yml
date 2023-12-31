@@ -13,7 +13,7 @@
   - type: Rotatable
   - type: Physics
     bodyType: Static
-    canCollide: False
+    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
