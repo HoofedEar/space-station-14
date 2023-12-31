@@ -9,10 +9,10 @@
     arc: 360
   - type: Clickable
   - type: InteractionOutline
+  - type: MovedByPressure
   - type: Rotatable
   - type: Physics
     bodyType: Static
-    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:

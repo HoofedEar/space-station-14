@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Forensics;
 using Content.Server.Stack;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
@@ -56,7 +57,8 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                         system.ComponentFactory))
                 {
                     var mapUid = transformComp.MapUid;
-                    var entityPosition = EntityCoordinates.FromMap((EntityUid)mapUid!, position, system.TransformSystem, system.EntityManager);
+                    var entityPosition = EntityCoordinates
+                        .FromMap((EntityUid)mapUid!, position, system.TransformSystem, system.EntityManager);
                     var spawned = system.EntityManager.SpawnAttachedTo(entityId, entityPosition);
                     system.TransformSystem.SetParent(spawned, transformComp.ParentUid);
 
