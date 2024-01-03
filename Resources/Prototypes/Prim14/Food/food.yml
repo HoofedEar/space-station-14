@@ -1,0 +1,96 @@
+﻿# ===== BERRIES =====
+
+- type: entity
+  id: BaseBerry
+  parent: BaseItem
+  name: BaseBerry
+  abstract: true
+  description: yummy!
+  components:
+  - type: Sprite
+    sprite: Prim14/Structures/berries.rsi
+    state: amarberry
+    scale: 0.8, 0.8
+  - type: Food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+          
+- type: entity
+  id: FoodGoldenBerry
+  parent: BaseBerry
+  name: golden berry
+  description: Looks delicious!
+
+
+
+# ===== FISH =====
+
+- type: entity
+  name: raw fish base
+  parent: FoodBase
+  id: RawFishBase
+  description: It would be wise to cook this first
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - RawFish
+  - type: Sprite
+    sprite: Prim14/Food/fish.rsi
+    scale: 0.6, 0.6
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 2
+          - ReagentId: Toxin
+            Quantity: 6
+
+# Raw fish
+
+- type: entity
+  name: raw cod
+  parent: RawFishBase
+  id: RawCod
+  components:
+  - type: Sprite
+    state: cod
+
+- type: entity
+  name: raw salmon
+  parent: RawFishBase
+  id: RawSalmon
+  components:
+  - type: Sprite
+    state: salmon
+
+- type: entity
+  name: raw bream
+  parent: RawFishBase
+  id: RawBream
+  components:
+  - type: Sprite
+    state: bream
+
+- type: entity
+  name: raw crawfish
+  parent: RawFishBase
+  id: RawCrawfish
+  components:
+  - type: Sprite
+    state: crawfish
+
+- type: entity
+  name: raw shrimp
+  parent: RawFishBase
+  id: RawShrimp
+  components:
+  - type: Sprite
+    state: shrimp

@@ -87,6 +87,8 @@
   id: FoodMeat
   description: A slab of raw meat.
   components:
+  - type: TimedCookable
+    recipe: CookedMeat
   - type: Sprite
     state: plain
   - type: SolutionContainerManager
@@ -109,6 +111,7 @@
   - type: Tag
     tags:
     - Meat
+    - Raw
 
 - type: entity
   name: raw human meat
