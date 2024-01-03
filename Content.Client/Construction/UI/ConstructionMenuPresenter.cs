@@ -152,7 +152,7 @@ namespace Content.Client.Construction.UI
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {
-                if (recipe.Hide)
+                if (!recipe.Hide)
                     continue;
 
                 if (_playerManager.LocalSession == null
@@ -194,6 +194,9 @@ namespace Content.Client.Construction.UI
 
             foreach (var prototype in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {
+                if (!prototype.Hide)
+                    continue;
+
                 var category = prototype.Category;
 
                 if (!string.IsNullOrEmpty(category))
