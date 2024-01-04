@@ -6,7 +6,7 @@
   targetNode: hatchet
   category: Wood
   description: A robust wooden hatchet.
-  show: true
+  hide: true
   icon:
     sprite: Prim14/Tools/woodenhatchet.rsi
     state: icon
@@ -20,7 +20,7 @@
   targetNode: pole
   category: Wood
   description: A simple fishing pole.
-  show: true
+  hide: true
   icon:
     sprite: Prim14/Tools/fishingpole.rsi
     state: icon

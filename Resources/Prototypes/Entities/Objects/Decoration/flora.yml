@@ -218,7 +218,7 @@
     state: stalagmite6
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree01
   name: tree
   components:
@@ -226,7 +226,7 @@
     state: tree01
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree02
   name: tree
   components:
@@ -234,7 +234,7 @@
     state: tree02
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree03
   name: tree
   components:
@@ -242,7 +242,7 @@
     state: tree03
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree04
   name: tree
   components:
@@ -250,7 +250,7 @@
     state: tree04
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree05
   name: tree
   components:
@@ -258,7 +258,7 @@
     state: tree05
 
 - type: entity
-  parent: BaseTree
+  parent: BaseTreePrim
   id: FloraTree06
   name: tree
   components:

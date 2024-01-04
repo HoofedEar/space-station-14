@@ -1,0 +1,45 @@
+- type: constructionGraph
+  id: RawBlacksmithJug
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rawjug
+          steps:
+            - material: WetClay
+              amount: 1
+              doAfter: 2
+    - node: rawjug
+      entity: ToolBlacksmithJugRaw
+
+- type: constructionGraph
+  id: RawClayBrick
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rawbrick
+          steps:
+            - material: WetClay
+              amount: 1
+              doAfter: 2
+    - node: rawbrick
+      entity: ClayBrickRaw
+
+- type: constructionGraph
+  id: Kiln
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: kilnfinish
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: DryBrick
+              amount: 15
+              doAfter: 5
+    - node: kilnfinish
+      entity: BaseKiln

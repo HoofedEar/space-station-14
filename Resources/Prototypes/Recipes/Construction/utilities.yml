@@ -227,7 +227,6 @@
   mirror: DisposalRouterFlipped
 
 - type: construction
-  hide: true
   name: disposal router
   description: A three-way router. Entities with matching tags get routed to the side.
   id: DisposalRouterFlipped
@@ -258,7 +257,6 @@
   mirror: DisposalSignalRouterFlipped
 
 - type: construction
-  hide: true
   name: disposal signal router
   description: A signal-controlled three-way router.
   id: DisposalSignalRouterFlipped
@@ -289,7 +287,6 @@
   mirror: DisposalJunctionFlipped
 
 - type: construction
-  hide: true
   name: disposal junction
   description: A three-way junction. The arrow indicates where items exit.
   id: DisposalJunctionFlipped
@@ -735,7 +732,6 @@
 
 - type: construction
   id: GasFilterFlipped
-  hide: true
   name: gas filter
   description: Very useful for filtering gases.
   graph: GasTrinary
@@ -772,7 +768,6 @@
 
 - type: construction
   id: GasMixerFlipped
-  hide: true
   name: gas mixer
   description: Very useful for mixing gases.
   graph: GasTrinary

@@ -1,0 +1,100 @@
+﻿- type: entity
+  name: sod
+  parent: BaseItem
+  id: FloorTileSod
+  description: A moist pile of grass.
+  components:
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: sod
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 2
+
+- type: entity
+  name: dirt
+  parent: BaseItem
+  id: Dirt
+  description: Very dirty.
+  components:
+    - type: Tag
+      tags:
+        - Dirt
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: icon
+
+- type: entity
+  name: clay
+  parent: BaseItem
+  id: Clay
+  components:
+    - type: Tag
+      tags:
+        - Clay
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: icon
+    - type: SolutionContainerManager
+      solutions:
+        cube:
+          maxVol: 5
+    - type: RefillableSolution
+      solution: cube
+    - type: Reactive
+      reactions:
+      - reagents: [ Water ]
+        methods: [ Touch, Ingestion, Injection ]
+        effects:
+        - !type:AddToSolutionReaction
+          solution: cube
+    - type: Rehydratable
+      possibleSpawns:
+      - ClayWet1
+
+- type: entity
+  name: wet clay
+  parent: BaseItem
+  id: ClayWet
+  suffix: Full
+  components:
+    - type: Stack
+      stackType: WetClay
+    - type: Tag
+      tags:
+        - WetClay
+    - type: Sprite
+      sprite: Prim14/Objects/claystuff.rsi
+      state: claylump
+    - type: Material
+      materials:
+        WetClay: 100
+
+- type: entity
+  name: wet clay
+  parent: ClayWet
+  id: ClayWet1
+  suffix: Single
+  components:
+    - type: Stack
+      stackType: WetClay
+      count: 1
+
+- type: entity
+  name: wet sod
+  parent: BaseItem
+  id: FloorTileWetSod
+  description: A moist pile of grass.
+  components:
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: sod
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 2
+    - type: FloorTile
+      outputs:
+        - clay_plating1
+        - floor_wet_grass

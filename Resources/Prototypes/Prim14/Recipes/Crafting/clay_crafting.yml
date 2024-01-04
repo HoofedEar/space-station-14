@@ -1,0 +1,45 @@
+- type: construction
+  name: raw blacksmith jug
+  id: rawblacksmithjug
+  graph: RawBlacksmithJug
+  startNode: start
+  targetNode: rawjug
+  category: Clay
+  description: The beginnings of a jug.
+  hide: true
+  icon:
+    sprite: Prim14/Tools/blacksmithjug.rsi
+    state: raw
+  objectType: Item
+
+- type: construction
+  name: raw clay brick
+  id: rawclaybrick
+  graph: RawClayBrick
+  startNode: start
+  targetNode: rawbrick
+  category: Clay
+  description: That's a nice brick.
+  hide: true
+  icon:
+    sprite: Prim14/Materials/claybricks.rsi
+    state: wetclay
+  objectType: Item
+
+- type: construction
+  name: kiln
+  id: KilnConstruction
+  graph: Kiln
+  startNode: start
+  targetNode: kiln
+  category: Clay
+  description: You sit in this. Either by will or force.
+  hide: true
+  icon:
+    sprite: Prim14/Structures/Metallurgy/kiln.rsi
+    state: icon
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

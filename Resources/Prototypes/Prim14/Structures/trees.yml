@@ -1,0 +1,53 @@
+- type: entity
+  name: Tree Renewable Spawner
+  id: TreeRenewableSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: blue
+    - type: RenewableSpawner
+      prototypes:
+        - FloraTree01
+        - FloraTree02
+        - FloraTree03
+        - FloraTree04
+        - FloraTree05
+        - FloraTree06
+      chance: 1.0
+      intervalSeconds: 10
+
+- type: entity
+  id: BaseTreePrim
+  description: Yep, it's a tree.
+  parent: BaseTree
+  abstract: true
+  components:
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 400
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                path: /Audio/Effects/tree_fell.ogg
+                params:
+                  volume: 5
+                  variation: 0.05
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                Log:
+                  min: 2
+                  max: 8
+                TreeRenewableSpawner:
+                  min: 1
+                  max: 1
