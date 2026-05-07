@@ -49,6 +49,13 @@
         Blunt: 10
     soundHit:
       collection: MetalThud
+  - type: UserInterface
+    interfaces:
+      enum.MultipleToolUiKey.Key:
+        type: MultipleToolBoundUserInterface
+  - type: ActivatableUI
+    inHandsOnly: true
+    key: enum.MultipleToolUiKey.Key
 
 - type: entity
   name: syndicate jaws of death

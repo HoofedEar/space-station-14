@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared.Interaction;
 using Content.Shared.Prying.Components;
 using Content.Shared.Tools.Components;
+using Content.Shared.Verbs;
 
 namespace Content.Shared.Tools.Systems;
 
@@ -10,8 +11,9 @@ public abstract partial class SharedToolSystem
     public void InitializeMultipleTool()
     {
         SubscribeLocalEvent<MultipleToolComponent, ComponentStartup>(OnMultipleToolStartup);
-        SubscribeLocalEvent<MultipleToolComponent, ActivateInWorldEvent>(OnMultipleToolActivated);
         SubscribeLocalEvent<MultipleToolComponent, AfterAutoHandleStateEvent>(OnMultipleToolHandleState);
+        SubscribeLocalEvent<MultipleToolComponent, GetVerbsEvent<AlternativeVerb>>(OnMultipleToolGetAltVerbs);
+        SubscribeLocalEvent<MultipleToolComponent, MultipleToolSelectedMessage>(OnMultipleToolSelected);
     }
 
     private void OnMultipleToolHandleState(EntityUid uid, MultipleToolComponent component, ref AfterAutoHandleStateEvent args)
@@ -26,12 +28,30 @@ public abstract partial class SharedToolSystem
             SetMultipleTool(uid, multiple, tool);
     }
 
-    private void OnMultipleToolActivated(EntityUid uid, MultipleToolComponent multiple, ActivateInWorldEvent args)
+    private void OnMultipleToolGetAltVerbs(EntityUid uid, MultipleToolComponent multiple, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (args.Handled || !args.Complex)
+        if (!args.CanAccess || !args.CanInteract || multiple.Entries.Length <= 1)
             return;
 
-        args.Handled = CycleMultipleTool(uid, multiple, args.User);
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("multiple-tool-component-cycle-verb"),
+            Act = () => CycleMultipleTool(uid, multiple, user),
+            Priority = -1,
+        });
+    }
+
+    private void OnMultipleToolSelected(EntityUid uid, MultipleToolComponent multiple, MultipleToolSelectedMessage args)
+    {
+        if (args.Index >= multiple.Entries.Length)
+            return;
+
+        if (multiple.CurrentEntry == args.Index)
+            return;
+
+        multiple.CurrentEntry = args.Index;
+        SetMultipleTool(uid, multiple, playSound: true, user: args.Actor);
     }
 
     public bool CycleMultipleTool(EntityUid uid, MultipleToolComponent? multiple = null, EntityUid? user = null)
